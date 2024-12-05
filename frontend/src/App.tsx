@@ -1,15 +1,15 @@
+import { Navigate, Route, Routes } from "react-router";
 import "./App.css";
-import Footer from "./components/Footer";
-import Home from "./components/Home";
-import Navbar from "./components/Navbar";
+import { Vacinas } from "./pages/Vacinas/Vacinas";
 
 const App: React.FC = () => {
   return (
-    <>
-      <Navbar />
-      <Home />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Navigate to="vacinas" />} />
+      <Route path="vacinas">
+        <Route index element={<Vacinas />} />
+      </Route>
+    </Routes>
   );
 };
 
