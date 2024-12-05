@@ -17,12 +17,12 @@ export class ApiVacinas {
     return this._http.get(RESOURCE_ROUTE).json<Vacina[]>();
   };
 
-  create = (vacina: Vacina) => {
+  create = (vacina: Omit<Vacina, 'id'>) => {
     return this._http.post(RESOURCE_ROUTE, { json: vacina }).json<Vacina>();
   };
 
   delete = (id: number) => {
-    return this._http.post(`${RESOURCE_ROUTE}/${id}`).json();
+    return this._http.delete(`${RESOURCE_ROUTE}/${id}`).json();
   };
 }
 

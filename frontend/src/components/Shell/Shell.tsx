@@ -8,7 +8,9 @@ export const Shell = ({ children }: { children: React.ReactNode }) => {
 
       <section className="flex grow items-stretch">
         <Sidebar />
-        <main className="p-6 bg-gray-100/10 grow">{children}</main>
+        <main className="p-6 bg-gray-100 grow">
+          <section className='bg-white p-4 shadow'>{children}</section>
+        </main>
       </section>
     </section>
   );

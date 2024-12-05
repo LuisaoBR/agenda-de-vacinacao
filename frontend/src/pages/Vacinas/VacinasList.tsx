@@ -2,52 +2,38 @@ import { NavLink } from "react-router";
 import { useQuery } from "../../api/use-query";
 import { defaultApiVacinas } from "../../api/vacinas";
 import { Shell } from "../../components/Shell/Shell";
+import { Table } from "../../components/Table/Table";
 
 export const VacinasList = () => {
   const [vacinas, loading] = useQuery(defaultApiVacinas.all);
+
+  const _delete = async (id: number) => {
+    await defaultApiVacinas.delete(id);
+    window.location.reload()
+  }
 
   return (
     <Shell>
       <section>
         <NavLink to="/vacinas/create">
-          <button>Nova Vacina</button>
+          <button className="bg-cyan-500 p-2 cursor-pointer">
+            Nova Vacina
+          </button>
         </NavLink>
       </section>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Doses</th>
-            <th>Periodicidade</th>
-            <th>Intervalo</th>
-          </tr>
-        </thead>
-
-        <tbody>
-          {loading && (
-            <tr>
-              <td colSpan={100}>Carregando...</td>
-            </tr>
-          )}
-
-          {!loading &&
-            (vacinas?.length ? (
-              vacinas.map((vacina) => (
-                <tr>
-                  <td>{vacina.nome}</td>
-                  <td>{vacina.doses}</td>
-                  <td>{vacina.periodicidade}</td>
-                  <td>{vacina.intervalo}</td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td colSpan={100}>Nenhuma vacina cadastrada</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>
+      <Table
+        loading={loading}
+        cols={["Nome", "Doses", "Periodicidade", "Intervalo"]}
+        data={vacinas?.map((vacina) => ({
+          id: vacina.id,
+          Nome: vacina.nome,
+          Doses: vacina.doses.toString(),
+          Periodicidade: vacina.periodicidade.toString(),
+          Intervalo: vacina.intervalo.toString(),
+        }))}
+        onDelete={_delete}
+      />
     </Shell>
   );
 };
