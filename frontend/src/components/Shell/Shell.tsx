@@ -3,10 +3,13 @@ import { Topbar } from "./Topbar";
 
 export const Shell = ({ children }: { children: React.ReactNode }) => {
   return (
-    <div>
+    <section className="h-screen flex flex-col">
       <Topbar />
-      <Sidebar />
-      <main>{children}</main>
-    </div>
+
+      <section className="flex grow items-stretch">
+        <Sidebar />
+        <main className="p-6 bg-gray-100/10 grow">{children}</main>
+      </section>
+    </section>
   );
 };

@@ -1,12 +1,19 @@
+import { NavLink } from "react-router";
 import { useQuery } from "../../api/use-query";
 import { defaultApiVacinas } from "../../api/vacinas";
 import { Shell } from "../../components/Shell/Shell";
 
-export const Vacinas = () => {
+export const VacinasList = () => {
   const [vacinas, loading] = useQuery(defaultApiVacinas.all);
 
   return (
     <Shell>
+      <section>
+        <NavLink to="/vacinas/create">
+          <button>Nova Vacina</button>
+        </NavLink>
+      </section>
+
       <table>
         <thead>
           <tr>

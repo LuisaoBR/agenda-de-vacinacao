@@ -1,13 +1,15 @@
 import { Navigate, Route, Routes } from "react-router";
 import "./App.css";
-import { Vacinas } from "./pages/Vacinas/Vacinas";
+import { VacinasList } from "./pages/Vacinas/VacinasList";
+import { VacinasCreate } from "./pages/Vacinas/VacinasCreate";
 
 const App: React.FC = () => {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="vacinas" />} />
       <Route path="vacinas">
-        <Route index element={<Vacinas />} />
+        <Route index element={<VacinasList />} />
+        <Route path="create" element={<VacinasCreate />} />
       </Route>
     </Routes>
   );
